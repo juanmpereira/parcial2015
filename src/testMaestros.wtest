@@ -2,8 +2,9 @@ import maestros.*
 import planeta.*
 
 describe "test" {
-	var lucas= new Jedi (valentia=50,inteligencia=100,midiclorianos = 10,sableDeLuz = 2, tiempoBueno=1,pazInterior=100)
-	var marcos = new Sith(valentia=50,inteligencia=100,midiclorianos = 10,sableDeLuz = 2, tiempoMalo=1,odio=10)
+	var lucas= new Maestro (valentia=50,inteligencia=100,midiclorianos = 10,sableDeLuz = 2,estado=jedi, tiempo=1,pazInterior=100,odio = 0)
+	var marcos = new Maestro (valentia=50,inteligencia=100,midiclorianos = 10,sableDeLuz = 2,estado=sith, tiempo=1,pazInterior=0, odio=10)
+	
 	test "lucas tiene 153 de poder debido a tener solo 1 ano en el lado bueno"{
 		assert.equals(153,lucas.poder())
 	} 

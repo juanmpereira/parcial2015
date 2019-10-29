@@ -19,6 +19,15 @@ class Maestro inherits Habitante {
 	method cambiarEstado(est){
 		estado = est
 	}
+	
+	method cambiarPaz(cant){
+			pazInterior +=cant
+			}
+		}
+		
+	method cambiarOdio(){
+			odio += odio*0.10
+		}
 }
 
 object jedi{	
@@ -27,7 +36,11 @@ object jedi{
 	}
 	
 	method vivirEvento(evento,maestro){
-		maestro.pazInterior()= pazInterior + evento.cargaEmocional()
+		maestro.cambiarPaz(evento.cargaEmocional())
+		
+		if(maestro.pazInterior()<=0){
+			maestro.cambiarEstado(sith)
+		}
 	}
 
 }
@@ -40,11 +53,11 @@ object sith {
 	method vivirEvento(evento,maestro){
 		
 		if(maestro.odio()>evento.cargaEmocional()){
-			maestro.cambiar( maestro.odio() * 0.10)
+			maestro.cambiarOdio()
 		}
 		else 
 		{
-			maestro.cambiarEstado(self)	
+			maestro.cambiarEstado(jedi)	
 		}
 	}
 	
