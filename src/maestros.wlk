@@ -4,12 +4,9 @@ class Maestro inherits Habitante {
 	var property midiclorianos
 	var property sableDeLuz
 	var property estado
-	var property tiempo
-	var property pazInterior
-	var property odio
 	
 	override method poder(){
-		return valentia + inteligencia + (midiclorianos * 0.10) + estado.sable(tiempo,sableDeLuz)
+		return valentia + inteligencia + (midiclorianos * 0.10) + estado.sable(sableDeLuz)
 	}
 	
 	method evento(evento){
@@ -20,44 +17,44 @@ class Maestro inherits Habitante {
 		estado = est
 	}
 	
-	method cambiarPaz(cant){
-			pazInterior +=cant
-			}
-		}
-		
-	method cambiarOdio(){
-			odio += odio*0.10
-		}
-}
+	}
 
-object jedi{	
-	method sable(tiempo,sableDeLuz){
+
+class Jedi {
+	var property pazInterior = 1000
+	var property tiempo = 0
+		
+	method sable(sableDeLuz){
 	return	sableDeLuz * tiempo
 	}
 	
 	method vivirEvento(evento,maestro){
-		maestro.cambiarPaz(evento.cargaEmocional())
+		pazInterior += evento.cargaEmocional()
 		
-		if(maestro.pazInterior()<=0){
-			maestro.cambiarEstado(sith)
+		if(pazInterior<=0){
+			maestro.cambiarEstado(new Sith())  
 		}
 	}
 
 }
 
-object sith {
-	method sable(tiempo,sableDeLuz){
+
+class Sith  {
+	var property odio = 100
+	var property tiempo = 0
+	
+	method sable(sableDeLuz){
 		return  sableDeLuz * 2 + tiempo
 	}
 	
 	method vivirEvento(evento,maestro){
 		
 		if(maestro.odio()>evento.cargaEmocional()){
-			maestro.cambiarOdio()
+			odio += odio*0.10
 		}
 		else 
 		{
-			maestro.cambiarEstado(jedi)	
+			maestro.cambiarEstado(new Jedi())	
 		}
 	}
 	

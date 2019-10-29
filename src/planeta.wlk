@@ -20,7 +20,10 @@ class Soldado inherits Habitante{
 	var property armamento = []
 	
 	override method poder(){
-		return valentia + inteligencia + self.armamento().forEach({a=>a.potencia()})
+		return valentia + inteligencia + self.equipo()
+	}
+	method equipo(){
+		return armamento.sum({a=>a.potencia()})
 	}
 }
 
