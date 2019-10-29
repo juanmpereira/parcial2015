@@ -3,38 +3,48 @@ import planeta.*
 class Maestro inherits Habitante {
 	var property midiclorianos
 	var property sableDeLuz
-	
-}
-
-
-class Jedi inherits Maestro{
-	var property tiempoBueno
+	var property estado
+	var property tiempo
 	var property pazInterior
-	
-	override method poder(){
-		return valentia + inteligencia + (midiclorianos * 0.10) + (sableDeLuz * tiempoBueno)
-	}
-	
-	method vivirEvento(evento){
-		pazInterior= pazInterior + evento.cargaEmocional()
-	}
-//como cambio a Sith en caso que corresponda
-}
-
-class Sith inherits Maestro{
-	var property tiempoMalo
 	var property odio
 	
 	override method poder(){
-		return valentia + inteligencia + (midiclorianos * 0.10) + (sableDeLuz * 2 + tiempoMalo)	
+		return valentia + inteligencia + (midiclorianos * 0.10) + estado.sable(tiempo,sableDeLuz)
 	}
-	method vivirEvento(evento){
-		if(odio>evento.cargaEmocional()){
-			odio+= (odio*0.10)
+	
+	method evento(evento){
+		estado.vivirEvento(evento,self)
+	}
+	
+	method cambiarEstado(est){
+		estado = est
+	}
+}
+
+object jedi{	
+	method sable(tiempo,sableDeLuz){
+	return	sableDeLuz * tiempo
+	}
+	
+	method vivirEvento(evento,maestro){
+		maestro.pazInterior()= pazInterior + evento.cargaEmocional()
+	}
+
+}
+
+object sith {
+	method sable(tiempo,sableDeLuz){
+		return  sableDeLuz * 2 + tiempo
+	}
+	
+	method vivirEvento(evento,maestro){
+		
+		if(maestro.odio()>evento.cargaEmocional()){
+			maestro.cambiar( maestro.odio() * 0.10)
 		}
 		else 
 		{
-	//cambiar a jedi		
+			maestro.cambiarEstado(self)	
 		}
 	}
 	

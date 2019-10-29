@@ -1,4 +1,4 @@
-Class planeta{
+class Planeta{
 	var property habitantes = []
 	
 	method poderPlaneta(){
