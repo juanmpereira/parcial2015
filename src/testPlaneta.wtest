@@ -1,0 +1,12 @@
+import planeta.*
+
+describe "test" {
+	var juan = new Soldado(valentia=50,inteligencia=100,armamento=[pistola,guantes])
+	const pistola = new Armamento (potencia=40)
+	const guantes= new Armamento(potencia = 10)
+	
+	test "juan tiene 200 de poder con pistola y guantes"{
+		assert.equals(200,juan.poder())
+	} 
+}
+
